@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Logo, Top, Down, Bar, Cart, Account, Phone } from './assets/Icons.jsx';
+import { Logo, Down, Bar, Cart, Account, Phone } from './assets/Icons.jsx';
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -77,7 +77,7 @@ function App() {
                     >
                       {item.label}
                       <Down className={`
-                        w-4 h-4 ml-1 transition-all duration-500 delay-100 ease-in-out ${dropdownOpen[item.label] ? 'scale-y-[-1]' : 'scale-y-1'}
+                        w-4 h-4 ml-1 transition-all duration-500 ease-in-out ${dropdownOpen[item.label] ? 'scale-y-[-1]' : 'scale-y-1'}
                       `} />
                     </button>
                   ) : (
