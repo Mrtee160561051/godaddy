@@ -50,6 +50,10 @@ function App() {
     return scrolled ? 'bg-white text-black' : 'bg-[#353535] text-white';
   }, [scrolled]);
 
+  const getDropdownBgColor2 = useCallback(()=>{
+    return scrolled? 'bg-white before:bg-white before:border-white':'bg-[#353535] before:bg-[#353535] before:border-[#353535]'
+  },[scrolled])
+
   return (
     <div className={`text-gray-700 sticky top-0 z-50 text-sm`}>
       <header className={`${getBgColor()} flex sticky ${scrolled ? 'bg-[#353535] text-white' : ''} top-0 left-0 justify-between flex-wrap gap-4 px-4 lg:px-10 py-3`}>
@@ -143,7 +147,9 @@ function App() {
                 )}
                 
                 {openDropdown === item.label && (
-                  <div className="absolute top-full right-0 bg-white shadow-lg p-2 w-48">
+                  <div className={`absolute top-full right-0  shadow-lg p-2 w-48 mt-1 ${getDropdownBgColor2()} before:content-[''] before:absolute before:-top-2 
+                      before:right-3 before:w-4 before:h-4  before:transform before:rotate-45 before:border-t before:border-l `}
+                  >
                     Dropdown content for {item.label}
                   </div>
                 )}
