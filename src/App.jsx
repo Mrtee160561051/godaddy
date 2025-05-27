@@ -51,7 +51,7 @@ function App() {
   }, [scrolled]);
 
   const getDropdownBgColor2 = useCallback(()=>{
-    return scrolled? 'bg-white before:bg-white before:border-white':'bg-[#353535] before:bg-[#353535] before:border-[#353535]'
+    return scrolled? 'bg-white before:bg-white before:border-white text-black':'bg-[#353535] before:bg-[#353535] before:border-[#353535] text-white'
   },[scrolled])
 
   return (
@@ -144,7 +144,7 @@ function App() {
                   >
                     {item.label}
                   </a>
-                )}
+               )}
                 
                 {openDropdown === item.label && (
                   <div className={`absolute top-full right-0  shadow-lg p-2 w-48 mt-1 ${getDropdownBgColor2()} before:content-[''] before:absolute before:-top-2 
@@ -163,11 +163,18 @@ function App() {
               </a>
             </li>
 
-            <li className="lg:hidden">
-              <a href="#account" className="flex items-center p-1" aria-label="Account">
+            <li className="lg:hidden" onClick={() => toggleDropdown('Sign In')}>
                 <Account className={`${getTextColor()} w-6 h-6 hover:text-[#00838C] transition-colors`} />
-              </a>
+              {openDropdown ==='Sign In' && (
+                  <div className={`absolute top-full right-12 lg:hidden shadow-lg p-2 w-48 mt-1 ${getDropdownBgColor2()} before:content-[''] before:absolute before:-top-2 
+                      before:right-3 before:w-4 before:h-4  before:transform before:rotate-45 before:border-t before:border-l `}
+                  >
+                    Dropdown content for Sign In
+                  </div>
+            )}
             </li>
+            
+            
 
             {/* Cart */}
             <li className="relative">
