@@ -125,10 +125,11 @@ function App() {
       )}
       
       {openDropdown === item.label && (
-        <div className={`absolute top-[125%] right-0 shadow-lg p-2 w-72 mt-1 flex flex-col gap-2 ${styles.dropdownBgColor2} before:content-[''] before:absolute before:-top-2 
+        <div className={`
+          absolute top-[125%] right-0 shadow-lg p-2 w-72 mt-1 flex flex-col gap-2 ${styles.dropdownBgColor2} before:content-[''] before:absolute before:-top-2 
             before:right-3 before:w-4 before:h-4 before:transform before:rotate-45 before:border-t before:border-l`}
         >
-          <Xmark className='text-lg absolute right-3'/>
+          <Xmark className='text-lg absolute right-3' onClick={() => toggleDropdown('Sign In')}/>
           <h3 className='font-bold'>Registered Users</h3>
           <p>Have an account? Sign in now.</p>
           <a className='block cursor-pointer underline text-[#00838C]'>Sign In</a>
@@ -186,8 +187,9 @@ function App() {
               <Account className={`${styles.textColor} w-6 h-6 hover:text-[#00838C] transition-colors`} />
               {openDropdown === 'Sign In' && (
                 <div className={`absolute top-[80%] right-12 flex flex-col gap-2 lg:hidden shadow-lg p-2 w-56 mt-1 ${styles.dropdownBgColor2} before:content-[''] before:absolute before:-top-2 
-                    before:right-3 before:w-4 before:h-4 before:transform before:rotate-45 before:border-t before:border-l`}
+                    before:right-3 before:w-4 before:h-4 before:transform before:rotate-45 before:border-t before:border-l` }
                 >
+                  <Xmark className='text-lg absolute right-3' onClick={() => toggleDropdown(null)}/>
                   <h3 className='font-bold'>Registered Users</h3>
                   <p>Have an account? Sign in now.</p>
                   <a className='block cursor-pointer underline text-[#00838C]'>Sign In</a>
@@ -216,12 +218,25 @@ function App() {
           </ul>
         </nav>
       </header>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="absolute top-0 left-0 w-full bg-white text-white p-4">
+          <ul>
+            {NAV_ITEMS.map(renderNavItem)}
+          </ul>
+          <div className="flex justify-between mt-4">
+            <Phone className="w-6 h-6 text-white" />
+            <Cart className="w-6 h-6 text-white" />
+          </div>
+        </div>
+      )}
+
       <main className='bg-black'>
         {/* Main content goes here */}
-       
       </main>
     </div>
   );
 }
 
-export default React.memo(App);  
+export default React.memo(App);
