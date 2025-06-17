@@ -128,6 +128,7 @@ function App() {
         <div className={`
           absolute top-[125%] right-0 shadow-lg p-2 w-72 mt-1 flex flex-col gap-2 ${styles.dropdownBgColor2} before:content-[''] before:absolute before:-top-2 
             before:right-3 before:w-4 before:h-4 before:transform before:rotate-45 before:border-t before:border-l`}
+          onClick={(e) => e.stopPropagation()}
         >
           <Xmark className='text-lg absolute right-3' onClick={() => toggleDropdown('Sign In')}/>
           <h3 className='font-bold'>Registered Users</h3>
@@ -148,7 +149,9 @@ function App() {
 
   return (
     <div className="text-gray-700 sticky top-0 z-50 text-sm bg-black">
-      <header className={`${styles.bgColor} flex sticky ${styles.headerBg} top-0 left-0 justify-between flex-wrap gap-2 px-4 lg:px-10 py-3`}>
+      <header className={`${styles.bgColor} flex sticky ${styles.headerBg} top-0 left-0 justify-between gap-2 px-4 lg:px-10 py-3`}
+      onClick={(e) =>{if(e.target === e.currentTarget)setOpenDropdown(null)}}
+      >
         {/* Main Navigation */}
         <section className="flex items-center gap-5">
           <div className='flex items-center gap-4'>
@@ -188,6 +191,7 @@ function App() {
               {openDropdown === 'Sign In' && (
                 <div className={`absolute top-[80%] right-12 flex flex-col gap-2 lg:hidden shadow-lg p-2 w-56 mt-1 ${styles.dropdownBgColor2} before:content-[''] before:absolute before:-top-2 
                     before:right-3 before:w-4 before:h-4 before:transform before:rotate-45 before:border-t before:border-l` }
+                    onClick={(e) => e.stopPropagation()}
                 >
                   <Xmark className='text-lg absolute right-3' onClick={() => toggleDropdown(null)}/>
                   <h3 className='font-bold'>Registered Users</h3>
@@ -221,19 +225,48 @@ function App() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="absolute top-0 left-0 w-full bg-white text-white p-4">
-          <ul>
-            {NAV_ITEMS.map(renderNavItem)}
-          </ul>
-          <div className="flex justify-between mt-4">
-            <Phone className="w-6 h-6 text-white" />
-            <Cart className="w-6 h-6 text-white" />
+        <>
+          <div className={`fixed inset-0 z-40 xl:hidden bg-black bg-opacity-50 transition-opacity ${mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={(e) => { if (e.target === e.currentTarget) setMobileMenuOpen(false); }}>
+          <div className="absolute top-0 h-full w-[min(25em,90vw)] bg-white text-white p-4">
+            <Logo className={`${styles.textColor} w-32 h-12 font-extralight mb-4`} aria-hidden="true" />
+            <ul>
+              {NAV_ITEMS.map(renderNavItem)}
+            </ul>
+            <div className="flex justify-between mt-4">
+              <Phone className="w-6 h-6 text-black" />
+              <Cart className="w-6 h-6 text-black" />
+            </div>
           </div>
-        </div>
+          <Xmark className='text-9xl text-white absolute top-2 right-2' onClick={() => setMobileMenuOpen(false)}/>
+          </div>
+        </>
       )}
 
-      <main className='bg-black'>
+      <main className='bg-black' onClick={() => setOpenDropdown(null)}>
         {/* Main content goes here */}
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus temporibus illo rerum. Dignissimos quidem cumque optio aperiam voluptatum. Cumque itaque vitae minus ex nemo dolores eaque nulla sit est sequi.
+        Vero aliquam eos ipsum laudantium debitis explicabo odit voluptate nihil ipsam quidem ad modi ducimus obcaecati magnam quas optio expedita exercitationem molestias officia voluptas, perspiciatis doloremque dignissimos harum. Eos, labore.
+        Fuga possimus dignissimos consequatur doloremque exercitationem officiis quibusdam neque alias! Cum quaerat necessitatibus saepe quo sequi, doloribus ex quis rem, voluptas deserunt, voluptatem incidunt facilis error illum dolorum nemo assumenda.
+        Quos quae dolor eaque dolorem laudantium laborum! Expedita provident perspiciatis nihil ipsum placeat vero culpa mollitia iure rerum aliquid deleniti ex consequuntur ratione, cupiditate dolores! Obcaecati dignissimos fugit veniam aliquam.
+        Ipsum molestiae a explicabo, nulla aperiam incidunt commodi repellendus laboriosam perferendis amet. Expedita eum quae fuga, veniam ipsa qui illum nemo sunt non perspiciatis quisquam eligendi id exercitationem ut itaque.
+        Dolore, voluptates tempore ut pariatur eum, porro voluptatem labore cupiditate accusamus, dignissimos reiciendis! Suscipit ullam dicta incidunt optio et quia molestiae sequi, maiores veritatis, aliquam numquam cumque laboriosam ut nemo.
+        Voluptates doloremque officia provident quisquam! Amet vero ratione illo doloribus id ullam iste quos distinctio accusamus, dignissimos laboriosam, ad labore minima beatae impedit. Ipsum ab molestiae dolore deserunt nemo sapiente.
+        Alias eaque ipsam debitis quae corrupti dolorem iusto nobis, quisquam laboriosam. Deserunt laudantium facilis assumenda nostrum perspiciatis eveniet ut quas accusantium! Rerum, quo nam natus officiis nemo itaque animi ducimus.
+        Deserunt voluptatum labore sapiente ducimus vel, veritatis culpa modi pariatur consequatur exercitationem ipsum quae. Nobis quas placeat ipsam hic nesciunt ipsum, in repellat odio numquam eum nostrum distinctio incidunt ipsa.
+        Minus eaque nulla molestiae eum perferendis ab, perspiciatis incidunt cumque eveniet alias vero harum quisquam unde. Repudiandae, eum nesciunt illo odit delectus, cupiditate eaque rerum repellendus obcaecati, maiores iure blanditiis.
+        Rem voluptas quisquam perspiciatis id commodi ratione iusto, soluta necessitatibus error ipsum consectetur voluptate sequi ea dignissimos hic similique ullam quibusdam maxime corporis dolor fuga nobis, accusamus voluptatum repellendus? Non?
+        Corrupti, culpa quaerat, voluptates similique voluptate repellendus architecto iure provident fugiat sunt voluptatibus. Quod adipisci maiores fugiat, officia eveniet, sit similique doloribus explicabo sapiente necessitatibus autem ipsa aperiam possimus nobis?
+        Reprehenderit rem veniam praesentium nisi doloremque vero iste debitis omnis eos, nostrum vitae, totam atque aut beatae ab natus in doloribus vel perspiciatis! Iusto exercitationem recusandae obcaecati nihil deleniti totam.
+        Quis deleniti reiciendis aliquam, autem voluptatibus placeat possimus voluptate quas ratione cumque! Exercitationem iusto ipsa dolorum totam architecto blanditiis, temporibus nostrum libero voluptates accusamus tenetur, aliquam cupiditate ipsam sunt laboriosam.
+        Soluta nulla non rerum. Officia aliquid quidem sit quae mollitia quia autem, temporibus velit ad aperiam nobis accusamus? Quasi enim maxime eaque inventore laudantium itaque soluta rem doloribus nisi vel?
+        Temporibus placeat officia deleniti minus aut, quis at. Dolor itaque possimus a eos voluptates modi quibusdam perferendis voluptatibus quo, molestias tempora. Distinctio repellendus eos modi cupiditate, nihil rem quis! Sed.
+        Odit impedit temporibus ipsa iste minima consequuntur. Reiciendis distinctio eaque quisquam repellendus. Sapiente ipsa facilis molestiae beatae sit, nam incidunt hic dignissimos voluptate similique veritatis asperiores quas in eveniet necessitatibus.
+        Neque, delectus obcaecati accusantium voluptate voluptatem nihil quod ut distinctio perspiciatis perferendis dicta ea aliquam, consectetur, temporibus tenetur! In aperiam quas unde, alias quod ab impedit ut reiciendis id architecto.
+        Saepe molestias ratione perspiciatis, qui assumenda rem expedita amet impedit cupiditate consequatur ullam non voluptate dolor porro quos. Neque deleniti praesentium officia ipsa illo consequatur excepturi impedit molestias quod dolorem.
+        Odio voluptatum quidem ab. Impedit totam neque facilis. Expedita, in eos, repellat animi, dolorum maiores consequuntur accusantium aut aliquid aperiam doloribus nihil! Eos ad blanditiis nulla ratione facilis, pariatur sequi!
+        Fugit mollitia nobis, ad nulla, aliquam nostrum eius excepturi optio vero omnis magni deleniti ipsum veniam facere, et voluptas quod expedita natus asperiores! Quas consectetur accusantium dicta molestias quis ipsam.
+        Officia aut numquam nam soluta exercitationem harum, inventore dicta, veritatis fugit sed facilis ab omnis alias quae maiores beatae aliquam ducimus hic illo? Ratione, quos! Perspiciatis commodi fugit beatae dolorum.
+        Quia voluptate officiis maiores quisquam, totam incidunt sapiente fugit repellendus velit. Temporibus unde maxime animi inventore, fugiat placeat dolorem commodi accusamus iusto, porro totam deleniti rerum quis ducimus dolore iure.
       </main>
     </div>
   );
