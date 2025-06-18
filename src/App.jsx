@@ -227,15 +227,71 @@ function App() {
       {mobileMenuOpen && (
         <>
           <div className={`fixed inset-0 z-40 xl:hidden bg-black bg-opacity-50 transition-opacity ${mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={(e) => { if (e.target === e.currentTarget) setMobileMenuOpen(false); }}>
-          <div className="absolute top-0 h-full w-[min(25em,90vw)] bg-white text-white p-4">
-            <Logo className={`${styles.textColor} w-32 h-12 font-extralight mb-4`} aria-hidden="true" />
-            <ul>
-              {NAV_ITEMS.map(renderNavItem)}
-            </ul>
-            <div className="flex justify-between mt-4">
-              <Phone className="w-6 h-6 text-black" />
-              <Cart className="w-6 h-6 text-black" />
+          <div className="flex flex-col justify-between top-0 h-full w-[min(25em,90vw)] bg-white text-white p-4">
+            <div>
+              <Logo className={`text-black w-32 h-12 font-extralight mb-4`} aria-hidden="true" />
+              <ul className="flex flex-col gap-2">
+                  {NAV_ITEMS.map((item) => (
+                    <li key={item.label} className="relative group"> {/* Added 'group' for hover effects */}
+                      {item.hasDropdown ? (
+                        <button
+                          onClick={() => toggleDropdown(item.label)}
+                          className="flex items-center justify-between w-full px-4 py-2 rounded transition-all duration-200 text-black hover:bg-gray-200"
+                          aria-haspopup="true"
+                          aria-expanded={openDropdown === item.label}
+                        >
+                          {item.label}
+                          {/* New right arrow with hover animation */}
+                          <span className={`ml-2 transition-transform duration-200 ${openDropdown === item.label ? 'rotate-90' : ''} group-hover:translate-x-1`}>
+                            →
+                          </span>
+                        </button>
+                      ) : (
+                        <a 
+                          href="#" 
+                          className="flex items-center px-4 py-2 hover:bg-gray-200 hover:text-black transition-all duration-400 rounded text-black"
+                        >
+                          {item.label}
+                        </a>
+                      )}
+                      
+                      {/* Dropdown content (only shows if clicked) */}
+                      {openDropdown === item.label && (
+                        <div className="mt-1 pl-4">
+                          {/* Your dropdown items here */}
+                          Dropdown content for {item.label}
+                        </div>
+                      )}
+                    </li>
+                  ))}
+              </ul>
             </div>
+            
+            <ul className="flex flex-col justify-between mt-4">
+              <li>
+                <a href="tel:+1234567890" className="flex group text-black items-center p-1" aria-label="Contact us">
+                  <Phone className={`text-black w-6 h-6 hover:text-[#00838C] transition-colors`} />
+                  <div className="ml-4 group-hover:underline">Contact Us</div>
+                </a>
+              </li>
+              <li>
+                <a href="#signin" className="group text-black flex items-center p-1" aria-label="Sign In">
+                  <Account className={`text-black w-6 h-6 hover:text-[#00838C] transition-colors`} />
+                  <div className="ml-4 group-hover:underline">Sign In</div>
+                </a>
+              </li>
+              <li className="relative">
+                  <a href="#cart" className="group flex items-center p-1  text-black" aria-label="Shopping cart">
+                    <Cart className={`text-black w-6 h-6 hover:text-[#00838C] transition-colors`} />
+                    <div className="ml-4 group-hover:underline">Basket</div>
+                    <span className="absolute bg-[#00838C] text-white rounded-full w-5 h-5 flex items-center justify-center text-xs -top-1 left-4">
+                      0
+                      <span className="sr-only">items in cart</span>
+                    </span>
+                    
+                  </a>
+              </li>
+            </ul>
           </div>
           <Xmark className='text-9xl text-white absolute top-2 right-2' onClick={() => setMobileMenuOpen(false)}/>
           </div>
